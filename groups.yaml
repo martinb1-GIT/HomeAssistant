@@ -1,0 +1,223 @@
+###### groups.yaml file ####
+default_view:
+  name: Home
+  view: no
+###################################################
+
+alarm_status_page:
+  name: Alarms
+  view: yes
+  entities:
+    - group.arlo_alarm_group
+    - group.alarms_group
+
+alarms_group:
+  name: Alarms
+  view: no
+  entities:
+    - alarm_control_panel.home_alarm 
+
+###################################################
+
+arlo_status_page:
+  name: Arlo
+  view: yes
+  entities:
+    - group.arlo_alarm_group
+    - group.arlo_backyard_group
+    - group.arlo_front_porch_group
+    - group.arlo_garage_door_group
+    - group.arlo_side_yard_group
+
+arlo_alarm_group:
+  name: Arlo Alarm Status
+  view: no
+  entities:
+    - alarm_control_panel.beach_house
+    - sensor.arlo_cameras
+
+arlo_backyard_group:
+  name: Backyard
+  view: no
+  entities:
+    - sensor.captured_today_backyard
+    - sensor.last_backyard
+    - sensor.total_camera_backyard
+    - sensor.battery_level_backyard
+    - sensor.signal_strength_backyard
+    - camera.backyard
+
+arlo_front_porch_group:
+  name: Front Porch
+  view: no
+  entities:
+    - sensor.captured_today_front_porch_south
+    - sensor.last_front_porch_south
+    - sensor.total_camera_front_porch_south
+    - sensor.battery_level_front_porch_south
+    - sensor.signal_strength_front_porch_south
+    - camera.front_porch_south
+
+arlo_garage_door_group:
+  name: Garage Door
+  view: no
+  entities:
+    - sensor.captured_today_garage_door
+    - sensor.last_garage_door
+    - sensor.total_camera_garage_door      
+    - sensor.battery_level_garage_door
+    - sensor.signal_strength_garage_door
+    - camera.garage_door
+
+arlo_side_yard_group:
+  name: Side Yard
+  view: no
+  entities:
+    - sensor.captured_today_side_yard
+    - sensor.last_side_yard
+    - sensor.total_camera_side_yard      
+    - sensor.battery_level_side_yard
+    - sensor.signal_strength_side_yard
+    - camera.side_yard
+#######################################################
+weather_page:
+  name: Weather
+  view: yes
+  entities:
+    - group.weather_overview_group
+    - group.weather_forecast_group
+    - group.weather_sun_group
+    - group.weather_radar_group
+weather_overview_group:
+  name: Weather Overview
+  view: no
+  entities:
+    - sensor.pws_alerts
+    - sensor.pws_weather_1d
+    - sensor.pws_temp_high_record_f
+    - sensor.pws_temp_high_1d_f
+    - sensor.pws_temp_f
+    - sensor.pws_temp_low_1d_f
+    - sensor.pws_temp_low_record_f
+    - sensor.pws_precip_1d
+    - sensor.pws_precip_1d_in
+    - sensor.pws_wind_mph
+    - sensor.pws_wind_1d_mph
+weather_forecast_group:
+  name: Daily Forecast
+  view: no
+  entities:
+    - sensor.yr_symbol
+    - sensor.pws_weather_1d
+    - sensor.pws_weather_1n
+    - sensor.pws_weather_2d
+    - sensor.pws_weather_2n
+    - sensor.pws_weather_3d
+    - sensor.pws_weather_3n
+    - sensor.pws_weather_4d
+    - sensor.pws_weather_4n
+weather_sun_group:
+  name: The Sun
+  view: no
+  entities:
+    - sun.sun
+    - sensor.sunrise_time
+    - sensor.sunset_time
+weather_radar_group:
+  name: Weather Radar
+  view: no
+  entities:
+    - camera.local_radar
+###############################################
+exterior_page:
+  name: Exterior
+  view: yes
+###############################################
+garage_page:
+  name: Garage
+  view: yes
+###############################################
+system_page:
+  name: System
+  view: yes
+###############################################
+ecobee_page:
+  name: Ecobee
+  view: yes
+  entities:
+    - group.ecobee_master_room_group
+    - group.ecobee_guest_room_group
+    - group.ecobee_living_room_group
+    - group.ecobee_thermostat_group
+    - group.ecobee_extras_group
+ecobee_master_room_group:
+  name: Master Bedroom
+  view: no
+  entities:
+    - sensor.bedroom_temperature
+    - binary_sensor.bedroom_occupancy
+ecobee_guest_room_group:
+  name: Guest Bedroom
+  view: no
+  entities:
+    - sensor.guest_room_temperature
+    - binary_sensor.guest_room_occupancy
+ecobee_living_room_group:
+  name: Living Room
+  view: no
+  entities:
+    - sensor.living_room_temperature
+    - binary_sensor.living_room_occupancy
+ecobee_thermostat_group:
+  name: Thermostat
+  view: no
+  entities:
+    - sensor.thermostat_temperature
+    - binary_sensor.thermostat_occupancy
+    - sensor.thermostat_humidity
+    - weather.thermostat
+#####################################################
+ring_page:
+  name: Ring
+  view: yes
+  entities:
+    - group.ring_group
+ring_group:
+  name: Ring Group
+  view: no
+  entities:
+    - camera.front_door
+    - sensor.ring_front_door_battery
+    - sensor.ring_front_door_last_activity
+    - sensor.ring_front_door_last_ding
+    - sensor.ring_front_door_last_motion
+    - sensor.ring_front_door_volume
+    - sensor.ring_front_door_wifi_signal_category
+    - sensor.ring_front_door_wifi_signal_strength
+######################################################
+mysensors_page:
+  name: MySensors
+  view: yes
+  entities:
+    - group.mysensors_group
+mysensors_group:
+  name: MySensors
+  view: no
+  entities:
+    - binary_sensor.motion_sensor_254_1
+#################################################
+cameras_page:
+  name: Cameras
+  view: yes
+  entities:
+    - camera.front_door
+    - camera.backyard
+    - camera.front_porch_south
+    - camera.garage_door
+    - camera.side_yard
+#scenes_page:
+#  name: Scenes
+#  view: yes
+#  enitites:
+#    - group.all_scripts
+#Surfoff Cam: blob:https://surfoff.com/43fc8db9-f7fc-4354-b08f-8067160f52a0

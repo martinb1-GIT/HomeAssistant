@@ -1,0 +1,18 @@
+light.porch_1:
+  platform: hue
+  unique_id: 00:17:88:01:00:f4:f5:f0-0b
+light.dormer_2:
+  platform: hue
+  unique_id: 00:17:88:01:02:21:99:5b-0b
+light.porch_4:
+  platform: hue
+  unique_id: 00:17:88:01:10:3d:23:a2-0b
+light.porch_3:
+  platform: hue
+  unique_id: 00:17:88:01:10:3d:42:27-0b
+light.porch_2:
+  platform: hue
+  unique_id: 00:17:88:01:00:e9:e9:7a-0b
+light.dormer_1:
+  platform: hue
+  unique_id: 00:17:88:01:02:79:ea:2b-0b

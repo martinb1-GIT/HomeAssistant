@@ -1,0 +1,173 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret timezone 
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+
+sensor: !include sensors.yaml
+
+# Text to speech
+tts:
+  - platform: google
+
+# Example configuration.yaml entry to enable the cloud component
+cloud:
+
+# Vera Devices
+vera:
+  vera_controller_url: http://192.168.1.104:3480/
+  # Optional to exclude devices - this is a list of vera device ids
+  exclude: [171, 166, 167, 168, 169, 170]
+  # Optional to import switches as lights - this is a list of vera device ids
+  #lights: [15, 17, 19, 21, 22, 24, 26, 43, 64, 70, 87]
+
+# Group
+group: !include groups.yaml
+
+automation: !include automations.yaml
+
+script: !include scripts.yaml
+
+climate:
+  platform: ecobee
+  
+# Ecobee
+ecobee:
+  api_key: !secret ecobee_api
+
+#################################################
+# Arlo Settings
+arlo:
+  username: !secret arlo_username 
+  password: !secret arlo_password
+
+###################################################
+alarm_control_panel 1:
+  - platform: manual
+    name: Home Alarm
+    code: !secrets alarm_code
+    pending_time: 30
+    delay_time: 20
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0
+####################################################
+#alarm_control_panel 2:
+#  - platform: arlo
+#  - id: arm_arlo_when_leaving
+#    alias: Arm Arlo cameras when leaving
+#    trigger:
+#      platform: state
+#      entity_id: group.family
+#     from: home
+#      to: not_home
+#    action:
+#      service: alarm_control_panel.disarmed
+#      entity_id: alarm_control_panel.beach_house
+#  - id: disarm_arlo_when_arriving
+#    alias: Set Arlo cameras to Home mode when arriving
+#    trigger:
+#      platform: state
+#      entity_id: group.family
+#      from: not_home
+#      to: home
+#    action:
+#      service: alarm_control_panel.armed_no_alerts
+#      entity_id: alarm_control_panel.beach_house
+#######################################################
+# Ring Settings
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
+
+mysensors:
+  gateways:
+    - device: '192.168.1.98'
+      persistence_file: '/home/homeassistant/.homeassistant/mysensors3.json'
+      tcp_port: 5003
+  optimistic: false
+  persistence: true
+  retain: true
+  version: '2.0'
+  
+# Camera Setup
+camera:
+  - platform: arlo
+    name: Arlo Cams
+#    ffmpeg_arguments: '-pred 1 -q:v 2'
+camera 2:
+  - platform: ring
+    name: Ring Cam
+#    ffmpeg_arguments: '-pred 1 -q:v 2'
+camera 3:
+  - platform: generic
+    name: Local Radar
+    still_image_url: https://icons.wxug.com/data/weather-maps/radar/united-states/charlotte-north-carolina-region-current-radar-animation.gif
+
+# Z-Wave Setup
+zwave:
+  usb_path: /dev/ttyUSB0
+
+# Zigbee Setup
+zha:
+  usb_path: /dev/ttyUSB1
+  database_path: /home/homeassistant/.homeassistant/zigbee.db
